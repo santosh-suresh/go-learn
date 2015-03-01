@@ -1,5 +1,0 @@
-Package gorilla/reverse is a set of utilities to create request routers.
-
-It provides interfaces to match and extract variables from an HTTP request and build URLs for registered routes. It also has a variety of matcher implementations for all kinds of request attributes, among other utilities.
-
-For example, the Regexp type produces reversible regular expressions that can be used to generate URLs for a regexp-based mux. To demonstrate, let's compile a simple regexp:

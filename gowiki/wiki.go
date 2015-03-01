@@ -9,9 +9,10 @@ import (
   "log"
   "flag"
   "net"
+  "os"
 )
 
-var templates = template.Must(template.ParseFiles("edit.html","view.html"))
+var templates = template.Must(template.ParseFiles("tmpl/edit.html","tmpl/view.html"))
 var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
 var (
     		addr = flag.Bool("addr", false, "find open address and print to final-port.txt")
@@ -23,7 +24,8 @@ type Page struct {
 }
 
 func (p *Page) save() error {
-	filename := p.Title + ".txt"
+  os.Mkdir("data",0755)
+	filename := "data/" + p.Title + ".txt"
 	return ioutil.WriteFile(filename, p.Body, 0600)
 }
 
