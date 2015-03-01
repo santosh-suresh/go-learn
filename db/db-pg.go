@@ -21,6 +21,7 @@ func main() {
 	defer db.Close()
 
 	rows, err := db.Query("select * from userinfo")
+
 	checkErr(err)
 	for rows.Next() {
 		var uid int
