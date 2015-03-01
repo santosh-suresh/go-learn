@@ -30,7 +30,7 @@ func (p *Page) save() error {
 }
 
 func loadPage(title string) (*Page, error) {
-  filename := title + ".txt"
+  filename := "data/"+ title + ".txt"
   body,err := ioutil.ReadFile(filename)
   if err != nil {
     return nil, err
@@ -96,11 +96,15 @@ func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
    }
 }
 
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+  http.Redirect(w, r, "/view/FrontPage", http.StatusFound)
+}
 
 
 
 func main() {
   flag.Parse()
+  http.HandleFunc("/", rootHandler)
    http.HandleFunc("/view/", makeHandler(viewHandler))
    http.HandleFunc("/edit/", makeHandler(editHandler))
    http.HandleFunc("/save/", makeHandler(saveHandler))
